@@ -1,28 +1,31 @@
+package project1;
+
 public class RomanNumeral {
 
-    private int value = 0;
+    private static final String UNDEFINED = "-100"; // Had to use a string because toString returns a string
+    private int value = 0;  // Stores the value as an integer
     private static String[] letters = {"I", "V", "X", "L", "C", "D", "M"};
     private String answer = "";
 
     public RomanNumeral(int integerValue){
-        if (integerValue < 1 || integerValue > 3999) {
+        if (integerValue < 1 || integerValue > 2500) {
 
-            System.out.println("Error: only numbers 1 - 3999 allowed.");
+            System.out.println("Error: only numbers 1-2500 allowed.");
         } else {
             value = integerValue;
         }
     }
     public String toString(){
         if (value == 0) {
-            return "Value not initialized.";
+            return UNDEFINED;
         }
         int num = value;
 
         /*
-        I generalized the process of building the appropriate string for the ones, tens, and
+        We generalized the process of building the appropriate string for the ones, tens, and
         hundreds places to avoid using repetitive switch statements. This could easily be scaled
         up to include higher levels of Roman Numerals by including them in letters[], adjusting the
-        starting i value in the for loop below, and removing the 1-3999 constraint in the constructor.
+        starting i value in the for loop below, and removing the 1-2500 constraint in the constructor.
          */
 
         for (int i = 3; i >= 0; i--) {
@@ -57,15 +60,7 @@ public class RomanNumeral {
     public int toInt() {
         return value;
     }
-    public int compareTo(RomanNumeral r) { 
-      /*
-       * Added functionality to compare two Roman Numeral objects
-       * -1 if this > r (input)
-       *  0 if this = r
-       *  1 if this < r
-       * Can be thought of as taking the sign of (this - r)
-       */
-      
+    public int compareTo(RomanNumeral r) {
         if (this.value < r.value) {
             return -1;
         }
@@ -84,7 +79,7 @@ public class RomanNumeral {
         }
         RomanNumeral r1 = new RomanNumeral(66);
         RomanNumeral r2 = new RomanNumeral(199);
-        RomanNumeral r3 = new RomanNumeral(3298);
+        RomanNumeral r3 = new RomanNumeral(2499);
         System.out.println("\n" + r1.compareTo(r2));
         System.out.println(r3.compareTo(r1));
         System.out.println(r2.compareTo(r2));
@@ -94,6 +89,7 @@ public class RomanNumeral {
         System.out.println(r1.toInt());
         System.out.println(r2.toInt());
         System.out.println(r3.toInt());
-
+        System.out.println("\nTrying 2501:");
+        System.out.println("\t" + new RomanNumeral(2501));
     }
 }
